@@ -1,0 +1,18 @@
+# SAM build output — vendored dependencies, ~149MB. Rebuilt by `sam build`.
+.aws-sam/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Local tooling
+.claude/settings.local.json
+.DS_Store
+
+# Never commit — secrets come from AWS Secrets Manager at runtime
+.env
+*.pem
+samconfig.local.toml
