@@ -1,6 +1,6 @@
 from decimal import Decimal
 from auth import validate_jwt_access
-from utils import get_token_from_header, get_body, build_response, get_params, find_address, find_username, find_by_address, find_by_username
+from utils import get_token_from_header, get_body, build_response, get_params, find_address, find_username, find_by_address, find_by_username, set_request_origin
 from payments import create_request as create_payment_request, find_requests_from, find_requests_to, respond_request, cancel_request as cancel_payment_request, completed_request
 from payments import create_txnEntry, get_completed, update_txn_status
 from swap import find_transferMethod
@@ -14,6 +14,9 @@ def validate_event(event):
 #this
 
 def lambda_handler(event, context):
+    #must run before validate_event, which builds 401 responses of its own
+    set_request_origin(event)
+
     route = event.get("routeKey", "")
 
     val_res = validate_event(event)
