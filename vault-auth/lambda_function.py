@@ -4,13 +4,16 @@ import base64
 from user_register import find_username, find_address, register_user, is_validUsername
 
 from user_data import lookup_userData
-from utils import build_response, get_cookies, get_body, get_params
+from utils import build_response, get_cookies, get_body, get_params, set_request_origin
 
 from profile import get_upload_url, update_db, get_photo
 
 from cdp_auth import generate_session_token
 
 def lambda_handler(event, context=None):
+    #echo back the caller's origin on every response built below
+    set_request_origin(event)
+
     #get the route of the request
     route = event.get("routeKey", "")
 

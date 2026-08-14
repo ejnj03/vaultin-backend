@@ -12,6 +12,9 @@ Resources:
   VaultAuthFunction:
     Type: AWS::Serverless::Function
     Properties:
+      # Pinned so the physical name is predictable. Without this,
+      # CloudFormation generates <stack>-<logical id>-<random>.
+      FunctionName: vault-auth
       Handler: lambda_function.lambda_handler
       Runtime: python3.11
       CodeUri: .
@@ -130,7 +133,9 @@ Resources:
       StageName: $default
       CorsConfiguration:
         AllowOrigins:
-          - "http://localhost:5173"
+          - "http://localhost:5180"
+          - "https://vaultin.app"
+          - "https://www.vaultin.app"
         AllowMethods:
           - GET
           - POST
