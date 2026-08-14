@@ -12,6 +12,9 @@ Resources:
   VaultAuthFunction:
     Type: AWS::Serverless::Function
     Properties:
+      # Pinned so the physical name is predictable. Without this,
+      # CloudFormation generates <stack>-<logical id>-<random>.
+      FunctionName: vault-auth
       Handler: lambda_function.lambda_handler
       Runtime: python3.11
       CodeUri: .

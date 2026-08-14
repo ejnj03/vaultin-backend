@@ -12,6 +12,9 @@ Resources:
   VaultPaymentsFunction:
     Type: AWS::Serverless::Function
     Properties:
+      # Pinned so the physical name is predictable. Without this,
+      # CloudFormation generates <stack>-<logical id>-<random>.
+      FunctionName: vault-payments
       Handler: lambda_function.lambda_handler
       CodeUri: .
       Architectures:
